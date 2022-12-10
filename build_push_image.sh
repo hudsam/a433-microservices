@@ -25,6 +25,17 @@ function listedImages() {
 	echo -e ""
 }
 
+# Function untuk membuat namespace, image, dan versi
+function setImage() {
+	echo "[INFO] Menentukan nama image..."
+	echo "[DATA] Menentukan namespace hub.docker.com: $__usernameDockerHub"
+	# Melakukan inisialisasi dan duplikasi image sesuai format penamaan Docker Registry
+	__changedImage="docker tag $__namedImage $__usernameDockerHub/$__namedImage"
+	echo "[RUN] $__changedImage"
+	$__changedImage
+	echo -e ""
+}
+
 ##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
@@ -54,8 +65,8 @@ sleep 3
 listedImages
 sleep 3
 
-# Duplikasi image yang sebelumnya dibuat sesuai format penamaan registry
-docker tag $__namedImage $__usernameDockerHub/$__namedImage
+# Penggunaan function: setImage
+setImage
 sleep 3
 
 # Melakukan autentikasi akun ke registry
