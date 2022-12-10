@@ -36,6 +36,26 @@ function setImage() {
 	echo -e ""
 }
 
+# Function untuk autentikasi akun Docker Registry (hub.docker.com)
+function resetAutentikasi() {
+	echo "[INFO] Menghapus session yang ada..."
+	# Melakukan inisialisasi dan pembersihan session Docker Engine
+	__resetSession="docker logout"
+	echo "[RUN] $__resetSession"
+	$__resetSession
+	#setPause 2
+	sleep 3
+
+	echo "[INFO] Autentikasi ulang hub.docker.com ..."
+	echo "[DATA] Menentukan username hub.docker.com: $__usernameDockerHub"
+	echo "[DATA] Menentukan password hub.docker.com: $__passwordDockerHub"
+	# Melakukan inisialisasi dan autentikasi ke Docker Registry
+	__relogAutentikasi="docker login --username $__usernameDockerHub --password-stdin"
+	echo "[RUN] $__passwordDockerHub | $__relogAutentikasi"
+	echo "$__passwordDockerHub" | $__relogAutentikasi
+	echo -e ""
+}
+
 ##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
@@ -69,8 +89,8 @@ sleep 3
 setImage
 sleep 3
 
-# Melakukan autentikasi akun ke registry
-echo "$__passwordDockerHub" | docker login --username $__usernameDockerHub --password-stdin
+# Penggunaan function: resetAutentikasi
+resetAutentikasi
 sleep 3
 
 # Mengunggah image ke namespace
