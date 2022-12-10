@@ -1,7 +1,11 @@
 #!/bin/bash
 
+##### Program Pendukung #####
+
 # Inisialisasi variabel untuk nama image dan versi
 $__namedImage="item-app:v1"
+
+##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
 # Pemberian jeda 3 detik
@@ -28,4 +32,6 @@ docker push $__usernameDockerHub/$__namedImage
 sleep 3
 
 echo "[INFO] Selesai..."
+
+##### Akhir Program #####
 
