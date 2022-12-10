@@ -56,6 +56,21 @@ function resetAutentikasi() {
 	echo -e ""
 }
 
+# Function untuk mengunggah Docker Image (lokal) ke Docker Registry
+function pushedImage() {
+	echo "[INFO] Mengunggah image ke Docker Repository..."
+	# Melakukan inisialisasi dan pengunggahan image ke Docker Registry
+	__pushedImage="docker push $__usernameDockerHub/$__namedImage"
+	echo "[RUN] $__pushedImage"
+	$__pushedImage
+
+	# Menghilangkan session dan environment variables
+	docker logout
+	unset __usernameDockerHub
+	unset __passwordDockerHub
+	echo -e ""
+}
+
 ##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
@@ -93,8 +108,8 @@ sleep 3
 resetAutentikasi
 sleep 3
 
-# Mengunggah image ke namespace
-docker push $__usernameDockerHub/$__namedImage
+# Penggunaan function: pushedImage
+pushedImage
 sleep 3
 
 echo "[INFO] Selesai..."
