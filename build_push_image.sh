@@ -1,9 +1,9 @@
 #!/bin/bash
 
-##### Program Pendukung #####
+##### Support Program #####
 
-# Inisialisasi variabel untuk nama image dan versi
-$__namedImage="item-app:v1"
+# Inisialiasisasi variabel untuk penamaan image
+__namedImage="item-app:v1"
 
 # Function untuk membuat image
 function createdImage() {
@@ -71,7 +71,7 @@ function pushedImage() {
 	echo -e ""
 }
 
-##### Program Utama #####
+##### Main Program #####
 
 echo -e "[INFO] Mulai...\n"
 # Pemberian jeda 3 detik
@@ -114,5 +114,5 @@ sleep 3
 
 echo "[INFO] Selesai..."
 
-##### Akhir Program #####
+##### Penutup Program #####
 
