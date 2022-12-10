@@ -1,0 +1,30 @@
+version: "3.8"
+
+volumes:
+  app-db:
+    name: app-db
+
+networks:
+  item-db:
+    name: item-db
+    driver: bridge
+
+services:
+  item-app:
+    image: hudsam/item-app:v1
+    ports:
+      - 80:8080
+    networks:
+      - item-db
+    restart: on-failure
+    depends_on:
+      - item-db
+
+  item-db:
+    image: mongo:3.0.0
+    volumes:
+      - app-db:/data/db
+    restart: always
+    networks:
+      - item-db
+
