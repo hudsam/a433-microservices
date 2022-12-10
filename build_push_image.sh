@@ -40,9 +40,6 @@ else
 fi
 sleep 3
 
-createdImage
-sleep 3
-
 # Menampilkan daftar image yang ada dengan kriteria tertentu
 docker images --all | awk '{ print $1 " / "  $2 }' | grep "item-*
 sleep 3
