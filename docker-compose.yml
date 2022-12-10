@@ -1,30 +1,43 @@
+# Menentukan compose file version
 version: "3.8"
 
+# Membuat volume dengan nama: app-db
 volumes:
   app-db:
     name: app-db
 
+# Membuat network dengan nama: item-db
 networks:
   item-db:
     name: item-db
     driver: bridge
 
+# Membuat container dengan nama: item-app dan item-db
 services:
   item-app:
+    # Mengambil docker image: item-app versi: v1 dari namespace: hudsam
     image: hudsam/item-app:v1
+    # Melakukan port mapping *:80 yang nantinya digunakan untuk mengakses program
     ports:
       - 80:8080
+    # Menghubungkan container dengan network: item-db
     networks:
       - item-db
+    # Menerapkan restart policy setiap mengalami kegagalan
     restart: on-failure
+    # Container: item-app dibuat setelah item-db selesai
     depends_on:
       - item-db
 
   item-db:
+    # Mengambil docker dari namespace: mongo versi: 3.0.0
     image: mongo:3.0.0
     volumes:
+    # Penggunaan binding mount: filesystem pada docker area
       - app-db:/data/db
+    # Menerapkan restart policy selalu reboot sampai nantinya dihapus
     restart: always
+    # Menghubungkan container dengan network: item-db
     networks:
       - item-db
 
