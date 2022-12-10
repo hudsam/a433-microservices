@@ -5,6 +5,16 @@
 # Inisialisasi variabel untuk nama image dan versi
 $__namedImage="item-app:v1"
 
+# Function untuk membuat image
+function createdImage() {
+	echo "[INFO] Membuat image..."
+	# Melakukan inisialisasi proses build image dengan nama sesuai variabel sebelumnya sesuai instruksi Dockerfile
+	__createdImage="docker build -t $__namedImage --file Dockerfile ."
+	echo "[RUN] $__createdImage"
+	$__createdImage
+	echo -e ""
+}
+
 ##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
@@ -12,7 +22,7 @@ echo -e "[INFO] Mulai...\n"
 sleep 3
 
 # Perintah untuk membuat image dari Dockerfile
-docker build -t $__namedImage --file Dockerfile .
+createdImage
 sleep 3
 
 # Menampilkan daftar image yang ada dengan kriteria tertentu
