@@ -15,6 +15,16 @@ function createdImage() {
 	echo -e ""
 }
 
+# Function untuk menampilkan daftar image(s)
+function listedImages() {
+	echo "[INFO] Daftar image(s) dengan kategori: item-*..."
+	# Melakukan inisialisasi dan mengambil daftar image(s) dengan filter string: item-*
+	__listedImage="docker images --all | awk '{ print \$1 \" / \"  \$2 }' | grep \"item-*\""
+	echo -e "[RUN] $__listedImage\n\n[INFO] Hasil..."
+	docker images --all | awk '{ print $1 " / "  $2 }' | grep "item-*"
+	echo -e ""
+}
+
 ##### Program Utama #####
 
 echo -e "[INFO] Mulai...\n"
@@ -40,8 +50,8 @@ else
 fi
 sleep 3
 
-# Menampilkan daftar image yang ada dengan kriteria tertentu
-docker images --all | awk '{ print $1 " / "  $2 }' | grep "item-*
+# Penggunaan function: listedImages
+listedImages
 sleep 3
 
 # Duplikasi image yang sebelumnya dibuat sesuai format penamaan registry
