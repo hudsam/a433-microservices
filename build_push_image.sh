@@ -21,7 +21,25 @@ echo -e "[INFO] Mulai...\n"
 # Pemberian jeda 3 detik
 sleep 3
 
-# Perintah untuk membuat image dari Dockerfile
+echo "[INFO] Menentukan Dockerfile..."
+# Mencari file dengan nama: Dockerfile
+if [[ -f "Dockerfile" ]]
+then
+	echo "[INFO] Ditemukan..."
+	echo -e ""
+	# Penggunaan function: createdImage
+	createdImage
+else
+	echo "[WARN] Tidak ditemukan..."
+	echo -e ""
+	echo "[INFO] Ubah nama file dengan: Dockerfile"
+	echo "[INFO] Program dihentikan."
+	echo -e ""
+	# Keluar dari program karena file: Dockerfile tidak ditemukan
+	exit
+fi
+sleep 3
+
 createdImage
 sleep 3
 
